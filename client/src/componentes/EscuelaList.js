@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Card, CardContent, Typography } from '@mui/material'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
 
 export default function EscuelaList() {
 
@@ -18,18 +18,33 @@ export default function EscuelaList() {
     return (
         <>
             <h1>Lista de escuelas</h1>
-            {
-                escuelas.map((escuela) => (
-                    <Card>
-                        <CardContent>
-                            <Typography>{escuela.idescuela}</Typography>
-                            <Typography>{escuela.nombre}</Typography>
-                            <Typography>{escuela.fechafundacion}</Typography>
-                            <Typography>{escuela.direccion}</Typography>
-                        </CardContent>
-                    </Card>
-                ))
-            }
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Nombre</TableCell>
+                                <TableCell>Fecha</TableCell>
+                                <TableCell>Direccion</TableCell>
+                                <TableCell>Resumen</TableCell>
+                                <TableCell>Lugar</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {escuelas.map((escuela) => (
+                                <TableRow
+                                    key={escuela.idescuela}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell>{escuela.nombre}</TableCell>
+                                    <TableCell>{escuela.fechafundacion}</TableCell>
+                                    <TableCell>{escuela.direccion}</TableCell>
+                                    <TableCell>{escuela.resumenhistorico}</TableCell>
+                                    <TableCell>{escuela.nombrelugar}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>       
         </>
     )
 }
