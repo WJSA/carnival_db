@@ -1,5 +1,5 @@
-import { Button, CardContent, Card, Grid, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { Button, CardContent, Card, Grid, TextField, Typography, Select, MenuItem } from '@mui/material';
+import { useState, useEffect } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -8,10 +8,27 @@ export default function EscuelaForm() {
   const [escuela, setEscuela] = useState({
     nombre: '',
     descripcion: '',
-    resumen: ''
+    resumen: '',
+    idlugar: '' 
   });
 
   const [fechaFundacion, setFechaFundacion] = useState(null);
+  const [lugares, setLugares] = useState([]); 
+
+  useEffect(() => {
+
+    const fetchLugares = async () => {
+      try {
+        const res = await fetch('http://localhost:4000/lugares'); 
+        const data = await res.json();
+        setLugares(data);
+      } catch (error) {
+        console.error('Error al cargar los lugares:', error);
+      }
+    };
+
+    fetchLugares();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,7 +83,7 @@ export default function EscuelaForm() {
                 variant="filled"
                 label="Direccion"
                 sx={{ display: 'block', margin: '.5rem 0' }}
-                name="descripcion"
+                name="direccion"
                 onChange={handleChange}
                 inputProps={{
                   style: { color: 'white' }
@@ -80,7 +97,7 @@ export default function EscuelaForm() {
                 variant="filled"
                 label="Resumen"
                 sx={{ display: 'block', margin: '.5rem 0' }}
-                name="resumen"
+                name="resumenhistorico"
                 onChange={handleChange}
                 inputProps={{
                   style: { color: 'white' }
@@ -93,6 +110,25 @@ export default function EscuelaForm() {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker name="fechafundacion" value={fechaFundacion} onChange={handleFechaFundacionChange} />
               </LocalizationProvider>
+
+              {/* Lista desplegable de lugares */}
+              <Select
+                value={escuela.idlugar}
+                onChange={handleChange}
+                name="idlugar"
+                variant="filled"
+                sx={{ display: 'block', margin: '.5rem 0' }}
+                inputProps={{
+                  style: { color: 'white' }
+                }}
+              >
+                <MenuItem value="">Seleccione un lugar</MenuItem>
+                {lugares.map((lugar) => (
+                  <MenuItem key={lugar.idlugar} value={lugar.idlugar}>
+                    {lugar.nombrelugar}
+                  </MenuItem>
+                ))}
+              </Select>
 
               <Button variant="contained" color="primary" type="submit">
                 Save

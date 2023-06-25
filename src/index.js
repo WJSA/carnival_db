@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors')
 
 const escuelaRoutes = require('./routes/escuela.routes')
+const lugarRoutes = require('./routes/lugar.routes')
 
 const app = express()
 
@@ -11,6 +12,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use(escuelaRoutes)
+app.use(lugarRoutes)
 
 app.use((err, req, res, next) => {
     return res.json({

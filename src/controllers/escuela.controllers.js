@@ -30,7 +30,6 @@ const createSchool = async (req, res, next) => {
 
     try {
         const result =  await pool.query('INSERT INTO cgj_escuela_de_samba (nombre, fechafundacion, direccion, resumenhistorico, idlugar) VALUES ($1, $2, $3, $4, $5) RETURNING *', [
-            idescuela, 
             nombre, 
             fechafundacion, 
             direccion, 
