@@ -29,7 +29,7 @@ const createSchool = async (req, res, next) => {
     const { idescuela, nombre, fechafundacion, direccion, resumenhistorico, idlugar } = req.body
 
     try {
-        const result =  await pool.query('INSERT INTO cgj_escuela_de_samba (idescuela, nombre, fechafundacion, direccion, resumenhistorico, idlugar) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [
+        const result =  await pool.query('INSERT INTO cgj_escuela_de_samba (nombre, fechafundacion, direccion, resumenhistorico, idlugar) VALUES ($1, $2, $3, $4, $5) RETURNING *', [
             idescuela, 
             nombre, 
             fechafundacion, 
