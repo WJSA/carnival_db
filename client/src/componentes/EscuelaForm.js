@@ -108,7 +108,19 @@ export default function EscuelaForm() {
               />
 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker name="fechafundacion" value={fechaFundacion} onChange={handleFechaFundacionChange} />
+                <DatePicker 
+                  name="fechafundacion" 
+                  value={fechaFundacion} 
+                  onChange={handleFechaFundacionChange} 
+                  sx={{
+                    '& input': {
+                      color: 'white'
+                    },
+                    '& label': {
+                      color: 'white'
+                    }
+                  }}
+                />
               </LocalizationProvider>
 
               {/* Lista desplegable de lugares */}
