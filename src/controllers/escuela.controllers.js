@@ -2,7 +2,7 @@ const pool = require('../db')
 
 const getAllSchools = async (req, res, next) => {
     try {
-        const allSchools = await pool.query('SELECT e.nombre, e.fechafundacion, e.direccion, e.resumenhistorico, l.nombrelugar FROM cgj_escuela_de_samba e INNER JOIN cgj_lugar l ON e.idlugar=l.idlugar')
+        const allSchools = await pool.query('SELECT e.idescuela, e.nombre, e.fechafundacion, e.direccion, e.resumenhistorico, l.nombrelugar FROM cgj_escuela_de_samba e INNER JOIN cgj_lugar l ON e.idlugar=l.idlugar')
         res.json(allSchools.rows)
     } catch(error) {
         next(error)
@@ -13,7 +13,7 @@ const getSchool = async (req, res, next) => {
     try {
         const { id } = req.params
 
-        const result = await pool.query('SELECT e.nombre, e.fechafundacion, e.direccion, e.resumenhistorico, l.nombrelugar FROM cgj_escuela_de_samba e INNER JOIN cgj_lugar l ON e.idlugar=l.idlugar WHERE idescuela = $1', [id])
+        const result = await pool.query('SELECT e.idescuela, e.nombre, e.fechafundacion, e.direccion, e.resumenhistorico, l.nombrelugar FROM cgj_escuela_de_samba e INNER JOIN cgj_lugar l ON e.idlugar=l.idlugar WHERE idescuela = $1', [id])
 
         if (result.rows.length === 0) return res.status(404).json({
             message: 'Escuela no encontrada'

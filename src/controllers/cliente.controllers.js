@@ -2,8 +2,8 @@ const pool = require('../db')
 
 const getAllClient = async (req, res, next) => {
     try {
-        const allSchools = await pool.query('SELECT * FROM cgj_cliente')
-        res.json(allSchools.rows)
+        const allClient = await pool.query('SELECT * FROM cgj_cliente')
+        res.json(allClient.rows)
     } catch(error) {
         next(error)
     }

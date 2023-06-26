@@ -2,8 +2,8 @@ const pool = require('../db')
 
 const getAllHistPrecio = async (req, res, next) => {
     try {
-        const allSchools = await pool.query('SELECT e.tipo, e.tipodesfile, e.sector, e.calidad, h.fechai, h.fechaf, h.costor$ FROM cgj_tipo_entrada e INNER JOIN cgj_hist_precio h ON e.identrada=h.idtipoentrada')
-        res.json(allSchools.rows)
+        const allHistPrecio = await pool.query('SELECT e.tipo, e.tipodesfile, e.sector, e.calidad, h.fechai, h.fechaf, h.costor$ FROM cgj_tipo_entrada e INNER JOIN cgj_hist_precio h ON e.identrada=h.idtipoentrada')
+        res.json(allHistPrecio.rows)
     } catch(error) {
         next(error)
     }

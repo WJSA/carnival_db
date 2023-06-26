@@ -2,8 +2,8 @@ const pool = require('../db')
 
 const getAllReserva = async (req, res, next) => {
     try {
-        const allSchools = await pool.query('SELECT r.n_reserva, r.estatus, r.fechahora, cl.primernombre, cl.primerapellido, cl.docidentidad, tp.tipo, tp.tipodesfile, tp.sector, tp.calidad, em.nombre , r.fechacancelacion, r.montototalr$ FROM cgj_reserva r INNER JOIN cgj_cliente cl ON r.idcliente=cl.idcliente INNER JOIN cgj_tipo_entrada tp ON r.idtipoentrada=tp.identrada INNER JOIN cgj_empresa em ON r.idempresa=em.idempresa')
-        res.json(allSchools.rows)
+        const allReserva = await pool.query('SELECT r.n_reserva, r.estatus, r.fechahora, cl.primernombre, cl.primerapellido, cl.docidentidad, tp.tipo, tp.tipodesfile, tp.sector, tp.calidad, em.nombre , r.fechacancelacion, r.montototalr$ FROM cgj_reserva r INNER JOIN cgj_cliente cl ON r.idcliente=cl.idcliente INNER JOIN cgj_tipo_entrada tp ON r.idtipoentrada=tp.identrada INNER JOIN cgj_empresa em ON r.idempresa=em.idempresa')
+        res.json(allReserva.rows)
     } catch(error) {
         next(error)
     }

@@ -13,7 +13,7 @@ router.get('/clientes', getAllClient);
 
 router.get('/clientes/:id', getClient);
 
-router.post('/clintes', createClient);
+router.post('/clientes', createClient);
 
 router.put('/clientes/:id', updateClient);
 
